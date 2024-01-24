@@ -18,7 +18,7 @@ plan:
         - contract-publish:
             contract-name: liquidstalk-exchange
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
-            cost: 42000
+            cost: 42040
             path: contracts/liquidstalk-exchange.clar
             anchor-block-only: true
             clarity-version: 2
