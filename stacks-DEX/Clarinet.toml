@@ -1,0 +1,24 @@
+[project]
+name = 'stacks-DEX'
+description = ''
+authors = []
+telemetry = true
+cache_dir = './.cache'
+requirements = []
+[contracts.liquid]
+path = 'contracts/liquid.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.liquidstalk-exchange]
+path = 'contracts/liquidstalk-exchange.clar'
+clarity_version = 2
+epoch = 2.4
+[repl.analysis]
+passes = ['check_checker']
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
