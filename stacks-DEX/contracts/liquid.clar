@@ -44,7 +44,7 @@
 
 ;; read only functions
 (define-read-only (get-balance (who principal))
-  (ft-get-balance magic-beans who)
+  (ft-get-balance liquid who)
 )
 
 ;; private functions
