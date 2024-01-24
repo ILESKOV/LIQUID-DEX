@@ -11,8 +11,15 @@ plan:
         - contract-publish:
             contract-name: liquid
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
-            cost: 11070
+            cost: 11840
             path: contracts/liquid.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: liquidstalk-exchange
+            expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            cost: 42000
+            path: contracts/liquidstalk-exchange.clar
             anchor-block-only: true
             clarity-version: 2
       epoch: "2.4"
