@@ -38,3 +38,8 @@
     (ft-mint? liquid-lp amount who)
   )
 )
+
+;; Any user can burn any amount of their own tokens
+(define-public (burn (amount uint))
+  (ft-burn? liquid-lp amount tx-sender)
+)

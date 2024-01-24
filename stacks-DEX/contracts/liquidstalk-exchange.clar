@@ -123,10 +123,46 @@
       (contract-address (as-contract tx-sender))
     )
       (begin
+        (print fee)
+        (print new-token-balance)
+        (print (- new-token-balance fee))
+        (print new-stx-balance)
+        (print stx-to-pay)
         ;; transfer tokens from user to contract
         (try! (contract-call? .liquid transfer token-amount user-address contract-address))
         ;; transfer tokens from contract to user
         (as-contract (stx-transfer? stx-to-pay contract-address user-address))
+      )
+    )
+  )
+)
+
+;; Anyone can remove liquidity by burning their LP tokens
+;; in exchange for receiving their proportion of the STX and token balances
+(define-public (remove-liquidity (liquidity-burned uint))
+  (begin
+    (asserts! (> liquidity-burned u0) err-zero-tokens)
+
+      (let (
+        (stx-balance (get-stx-balance))
+        (token-balance (get-token-balance))
+        (liquidity-token-supply (contract-call? .liquid-lp get-total-supply))
+
+        ;; STX withdrawn = liquidity-burned * existing STX balance / total existing LP tokens
+        ;; Tokens withdrawn = liquidity-burned * existing token balance / total existing LP tokens
+        (stx-withdrawn (/ (* stx-balance liquidity-burned) liquidity-token-supply))
+        (tokens-withdrawn (/ (* token-balance liquidity-burned) liquidity-token-supply))
+
+        (contract-address (as-contract tx-sender))
+        (burner tx-sender)
+      )
+      (begin 
+        ;; burn liquidity tokens as tx-sender
+        (try! (contract-call? .liquid-lp burn liquidity-burned))
+        ;; transfer STX from contract to tx-sender
+        (try! (as-contract (stx-transfer? stx-withdrawn contract-address burner)))
+        ;; transfer tokens from contract to tx-sender
+        (as-contract (contract-call? .liquid transfer tokens-withdrawn contract-address burner))
       )
     )
   )
