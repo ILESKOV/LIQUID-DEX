@@ -1,4 +1,5 @@
 import { showConnect } from '@stacks/connect'
+import ActionButton from '../components/ActionButton'
 import SecondaryButton from '../components/SecondaryButton'
 import { appDetails } from '../lib/constants'
 import { useStacks } from '../providers/StacksProvider'
@@ -21,16 +22,16 @@ export default function Auth() {
 
   if (address) {
     return (
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-4 text-gray-300">
         <p>
-          Logged in as: <b> {address}</b>
+          Logged in as: <b>{address}</b>
         </p>
-        <SecondaryButton type="button" onClick={handleLogIn}>
+        <ActionButton type="button" onClick={handleLogIn}>
           Change Account
-        </SecondaryButton>
-        <SecondaryButton type="button" onClick={logUserOut}>
+        </ActionButton>
+        <ActionButton type="button" onClick={logUserOut}>
           Log Out
-        </SecondaryButton>
+        </ActionButton>
       </div>
     )
   } else {
