@@ -1,25 +1,10 @@
-import { AppConfig, showConnect, UserData, UserSession } from '@stacks/connect'
-import { useEffect, useState } from 'react'
+import { showConnect } from '@stacks/connect'
 import SecondaryButton from '../components/SecondaryButton'
 import { appDetails } from '../lib/constants'
+import { useStacks } from '../providers/StacksProvider'
 
 export default function Auth() {
-  const [userData, setUserData] = useState<UserData | undefined>(undefined)
-  const address = userData?.profile?.stxAddress?.testnet
-
-  const appConfig = new AppConfig(['store_write'])
-  const userSession = new UserSession({ appConfig })
-
-  useEffect(() => {
-    if (userSession.isSignInPending()) {
-      userSession.handlePendingSignIn().then((userData) => {
-        setUserData(userData)
-      })
-    } else if (userSession.isUserSignedIn()) {
-      // setLoggedIn(true);
-      setUserData(userSession.loadUserData())
-    }
-  }, [])
+  const { address, userSession } = useStacks()
 
   const handleLogIn = async () => {
     showConnect({
