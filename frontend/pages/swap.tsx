@@ -56,7 +56,7 @@ export default function SwapPage() {
       return
     }
 
-    // (contract-call? .beanstalk-exchange stx-to-token-swap u1000)
+    // (contract-call? .liquidstalk-exchange stx-to-token-swap u1000)
     const microstacks = stxAmount * microstacksPerSTX
 
     const stxPostCondition = makeStandardSTXPostCondition(

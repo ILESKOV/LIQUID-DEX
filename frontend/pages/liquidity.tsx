@@ -60,7 +60,7 @@ export default function LiquidityPage() {
 
     console.log('Providing liquidity...')
 
-    // (contract-call? .beanstalk-exchange provide-liquidity u1000 u2000)
+    // (contract-call? .liquidstalk-exchange provide-liquidity u1000 u2000)
     const stxAmount = (
       e.currentTarget.elements.namedItem('stx-amount') as HTMLInputElement
     ).valueAsNumber
@@ -80,7 +80,7 @@ export default function LiquidityPage() {
       address,
       FungibleConditionCode.Equal,
       tokenAmount,
-      createAssetInfo(contractOwnerAddress, 'magic-beans', 'magic-beans')
+      createAssetInfo(contractOwnerAddress, 'liquid', 'liquid')
     )
 
     const options: ContractCallRegularOptions = {
@@ -120,7 +120,7 @@ export default function LiquidityPage() {
       address,
       FungibleConditionCode.Equal,
       burnAmount,
-      createAssetInfo(contractOwnerAddress, 'magic-beans-lp', 'magic-beans-lp')
+      createAssetInfo(contractOwnerAddress, 'liquid-lp', 'liquid-lp')
     )
 
     // Since we don't know exactly how much STX/tokens, just say >0
@@ -138,7 +138,7 @@ export default function LiquidityPage() {
       exchangeContractName,
       FungibleConditionCode.Greater,
       0,
-      createAssetInfo(contractOwnerAddress, 'magic-beans', 'magic-beans')
+      createAssetInfo(contractOwnerAddress, 'liquid', 'liquid')
     )
 
     const options: ContractCallRegularOptions = {
@@ -152,7 +152,7 @@ export default function LiquidityPage() {
       onFinish: ({ txId }) => {
         addTransactionToast(
           txId,
-          `Burning liquidity (${burnAmount.toLocaleString()} MAGIC-LP)...`
+          `Burning liquidity (${burnAmount.toLocaleString()} LIQUID-LP)...`
         )
       },
     }
@@ -171,7 +171,7 @@ export default function LiquidityPage() {
     // toFixed(6) rounds to 6 decimal places, the + removes trailing 0s. Eg. 0.050000 -> 0.05
     return (
       <p>
-        1 STX = <b>{+exchangeRatio.toFixed(6)}</b> Magic Beans
+        1 'STX' = <b>{+exchangeRatio.toFixed(6)}</b> 'Liquid' tokens
       </p>
     )
   }
@@ -194,9 +194,9 @@ export default function LiquidityPage() {
           <div>
             <label
               htmlFor="stx-amount"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-400"
             >
-              STX to provide
+              'STX' to provide
             </label>
             <div className="mt-1">
               <NumberInput
@@ -211,9 +211,9 @@ export default function LiquidityPage() {
           <div>
             <label
               htmlFor="token"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-400"
             >
-              Magic Beans to provide
+              'Liquid' tokens to provide
             </label>
             <div className="mt-1">
               <NumberInput
@@ -239,9 +239,9 @@ export default function LiquidityPage() {
           <div>
             <label
               htmlFor="burn-amount"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-400"
             >
-              MAGIC-LP to burn
+              'LIQUID-LP' to burn
             </label>
             <div className="mt-1">
               <NumberInput

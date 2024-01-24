@@ -29,7 +29,7 @@ export default function AdminPage() {
     e.preventDefault()
     console.log(`Minting ${mintAmount} of ${exchangeToken}`)
 
-    // (contract-call? .magic-beans mint u1000000 tx-sender)
+    // (contract-call? .liquid mint u1000000 tx-sender)
     const options: ContractCallRegularOptions = {
       contractAddress: contractOwnerAddress,
       contractName: exchangeToken,
@@ -57,7 +57,7 @@ export default function AdminPage() {
   ) => {
     e.preventDefault()
 
-    // (contract-call? .magic-beans-lp set-minter .beanstalk-exchange)
+    // (contract-call? .liquid-lp set-minter .liquidstalk-exchange)
     const options: ContractCallRegularOptions = {
       contractAddress: contractOwnerAddress,
       contractName: lpToken,
@@ -85,7 +85,7 @@ export default function AdminPage() {
         <div>
           <label
             htmlFor="exchange-token"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-400"
           >
             Exchange Token
           </label>
@@ -104,7 +104,7 @@ export default function AdminPage() {
         <div>
           <label
             htmlFor="lp-token"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-400"
           >
             LP Token
           </label>
@@ -123,7 +123,7 @@ export default function AdminPage() {
         <div>
           <label
             htmlFor="mint-amount"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-400"
           >
             Mint Amount
           </label>
