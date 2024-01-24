@@ -2,6 +2,8 @@ import { ContractCallRegularOptions, openContractCall } from '@stacks/connect'
 import {
   createAssetInfo,
   FungibleConditionCode,
+  makeContractFungiblePostCondition,
+  makeContractSTXPostCondition,
   makeStandardFungiblePostCondition,
   makeStandardSTXPostCondition,
   uintCV,
@@ -11,6 +13,7 @@ import ActionButton from '../components/ActionButton'
 import Auth from '../components/Auth'
 import NumberInput from '../components/NumberInput'
 import PageHeading from '../components/PageHeading'
+import SectionHeading from '../components/SectionHeading'
 import {
   appDetails,
   contractOwnerAddress,
@@ -77,7 +80,7 @@ export default function LiquidityPage() {
       address,
       FungibleConditionCode.Equal,
       tokenAmount,
-      createAssetInfo(contractOwnerAddress, 'liquid', 'liquid')
+      createAssetInfo(contractOwnerAddress, 'magic-beans', 'magic-beans')
     )
 
     const options: ContractCallRegularOptions = {
@@ -95,6 +98,68 @@ export default function LiquidityPage() {
     await openContractCall(options)
   }
 
+  const removeLiquidity = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log('Removing liquidity...')
+
+    if (!address || !exchangeInfo) {
+      console.error('Address and exchangeInfo are required for removeLiquidity')
+      return
+    }
+
+    // (contract-call? .my-exchange remove-liquidity u5000)
+    const burnAmount = (
+      e.currentTarget.elements.namedItem('burn-amount') as HTMLInputElement
+    ).valueAsNumber
+
+    // Our LP token has 6 decimals
+
+    const functionArgs = [uintCV(burnAmount)]
+
+    const burnPostCondition = makeStandardFungiblePostCondition(
+      address,
+      FungibleConditionCode.Equal,
+      burnAmount,
+      createAssetInfo(contractOwnerAddress, 'magic-beans-lp', 'magic-beans-lp')
+    )
+
+    // Since we don't know exactly how much STX/tokens, just say >0
+    // Optionally you could extend `fetchExchangeInfo` to get the number, and then use that to calculate the amount
+    // Could also add another input and let the user set what they expect!
+    const stxPostCondition = makeContractSTXPostCondition(
+      contractOwnerAddress,
+      exchangeContractName,
+      FungibleConditionCode.Greater,
+      0
+    )
+
+    const tokenPostCondition = makeContractFungiblePostCondition(
+      contractOwnerAddress,
+      exchangeContractName,
+      FungibleConditionCode.Greater,
+      0,
+      createAssetInfo(contractOwnerAddress, 'magic-beans', 'magic-beans')
+    )
+
+    const options: ContractCallRegularOptions = {
+      contractAddress: contractOwnerAddress,
+      contractName: exchangeContractName,
+      functionName: 'remove-liquidity',
+      functionArgs,
+      postConditions: [burnPostCondition, stxPostCondition, tokenPostCondition],
+      network,
+      appDetails,
+      onFinish: ({ txId }) => {
+        addTransactionToast(
+          txId,
+          `Burning liquidity (${burnAmount.toLocaleString()} MAGIC-LP)...`
+        )
+      },
+    }
+
+    await openContractCall(options)
+  }
+
   const makeExchangeRatioSection = () => {
     if (!exchangeInfo) {
       return <p>Fetching exchange data...</p>
@@ -106,59 +171,91 @@ export default function LiquidityPage() {
     // toFixed(6) rounds to 6 decimal places, the + removes trailing 0s. Eg. 0.050000 -> 0.05
     return (
       <p>
-        1 'STX' = <b>{+exchangeRatio.toFixed(6)}</b> 'Liquid'
+        1 STX = <b>{+exchangeRatio.toFixed(6)}</b> Magic Beans
       </p>
     )
   }
 
   return (
     <div className="m-auto flex max-w-4xl flex-col items-stretch gap-8">
-      <PageHeading>Provide Liquidity</PageHeading>
+      <PageHeading>Liquidity</PageHeading>
 
       <Auth />
 
-      {makeExchangeRatioSection()}
+      <section className="flex flex-col gap-8">
+        <SectionHeading>Provide Liquidity</SectionHeading>
 
-      <form
-        className="flex flex-row items-end gap-4"
-        onSubmit={provideLiquidity}
-      >
-        <div>
-          <label
-            htmlFor="stx-amount"
-            className="block text-sm font-medium text-gray-700"
-          >
-            'STX' to provide
-          </label>
-          <div className="mt-1">
-            <NumberInput
-              name="stx-amount"
-              placeholder={123}
-              required={true}
-              decimals={6}
-            />
+        {makeExchangeRatioSection()}
+
+        <form
+          className="flex flex-row items-end gap-4"
+          onSubmit={provideLiquidity}
+        >
+          <div>
+            <label
+              htmlFor="stx-amount"
+              className="block text-sm font-medium text-gray-700"
+            >
+              STX to provide
+            </label>
+            <div className="mt-1">
+              <NumberInput
+                name="stx-amount"
+                placeholder={123}
+                required={true}
+                decimals={6}
+              />
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label
-            htmlFor="token"
-            className="block text-sm font-medium text-gray-700"
-          >
-            'Liquid' tokens to provide
-          </label>
-          <div className="mt-1">
-            <NumberInput
-              name="token-amount"
-              placeholder={456}
-              required={true}
-              decimals={0}
-            />
+          <div>
+            <label
+              htmlFor="token"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Magic Beans to provide
+            </label>
+            <div className="mt-1">
+              <NumberInput
+                name="token-amount"
+                placeholder={456}
+                required={true}
+                decimals={0}
+              />
+            </div>
           </div>
-        </div>
 
-        <ActionButton type="submit">Provide Liquidity</ActionButton>
-      </form>
+          <ActionButton type="submit">Provide Liquidity</ActionButton>
+        </form>
+      </section>
+
+      <section className="flex flex-col gap-8">
+        <SectionHeading>Remove Liquidity</SectionHeading>
+
+        <form
+          className="flex flex-row items-end gap-4"
+          onSubmit={removeLiquidity}
+        >
+          <div>
+            <label
+              htmlFor="burn-amount"
+              className="block text-sm font-medium text-gray-700"
+            >
+              MAGIC-LP to burn
+            </label>
+            <div className="mt-1">
+              <NumberInput
+                name="burn-amount"
+                placeholder={123}
+                required={true}
+                decimals={0}
+              />
+            </div>
+          </div>
+
+          <ActionButton type="submit">Remove Liquidity</ActionButton>
+        </form>
+      </section>
     </div>
   )
 }

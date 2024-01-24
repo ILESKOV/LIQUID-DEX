@@ -16,9 +16,16 @@ plan:
             anchor-block-only: true
             clarity-version: 2
         - contract-publish:
+            contract-name: liquid-lp
+            expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            cost: 13030
+            path: contracts/liquid-lp.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
             contract-name: liquidstalk-exchange
             expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
-            cost: 42040
+            cost: 70770
             path: contracts/liquidstalk-exchange.clar
             anchor-block-only: true
             clarity-version: 2
