@@ -152,7 +152,7 @@ export default function LiquidityPage() {
       onFinish: ({ txId }) => {
         addTransactionToast(
           txId,
-          `Burning liquidity (${burnAmount.toLocaleString()} LIQUID-LP)...`
+          `Burning liquidity (${burnAmount.toLocaleString()} 'LIQUID-LP')...`
         )
       },
     }
