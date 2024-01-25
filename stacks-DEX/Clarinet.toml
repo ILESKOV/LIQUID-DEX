@@ -15,8 +15,8 @@ path = 'contracts/liquid-lp.clar'
 clarity_version = 2
 epoch = 2.4
 
-[contracts.liquidstalk-exchange]
-path = 'contracts/liquidstalk-exchange.clar'
+[contracts.liquid-exchange]
+path = 'contracts/liquid-exchange.clar'
 clarity_version = 2
 epoch = 2.4
 [repl.analysis]
