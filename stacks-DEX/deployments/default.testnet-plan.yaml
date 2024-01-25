@@ -1,0 +1,32 @@
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: liquid
+            expected-sender: ST1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KSVC9T2H
+            cost: 872457636
+            path: contracts/liquid.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: liquid-lp
+            expected-sender: ST1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KSVC9T2H
+            cost: 872511608
+            path: contracts/liquid-lp.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: liquid-exchange
+            expected-sender: ST1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KSVC9T2H
+            cost: 873968853
+            path: contracts/liquid-exchange.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "2.4"
