@@ -60,7 +60,7 @@ export default function LiquidityPage() {
 
     console.log('Providing liquidity...')
 
-    // (contract-call? .liquidstalk-exchange provide-liquidity u1000 u2000)
+    // (contract-call? .liquid-exchange provide-liquidity u1000 u2000)
     const stxAmount = (
       e.currentTarget.elements.namedItem('stx-amount') as HTMLInputElement
     ).valueAsNumber

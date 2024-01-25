@@ -57,7 +57,7 @@ export default function AdminPage() {
   ) => {
     e.preventDefault()
 
-    // (contract-call? .liquid-lp set-minter .liquidstalk-exchange)
+    // (contract-call? .liquid-lp set-minter .liquid-exchange)
     const options: ContractCallRegularOptions = {
       contractAddress: contractOwnerAddress,
       contractName: lpToken,

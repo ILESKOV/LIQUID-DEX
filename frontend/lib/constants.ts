@@ -7,6 +7,6 @@ export const appDetails: AuthOptions['appDetails'] = {
 
 export const contractOwnerAddress = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM'
 
-export const exchangeContractName = 'liquidstalk-exchange'
+export const exchangeContractName = 'liquid-exchange'
 
 export const microstacksPerSTX = 1_000_000
