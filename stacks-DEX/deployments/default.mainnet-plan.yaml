@@ -1,0 +1,32 @@
+---
+id: 0
+name: Mainnet deployment
+network: mainnet
+stacks-node: "https://api.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: liquid
+            expected-sender: SP1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KR9Y97S5
+            cost: 4500264
+            path: contracts/liquid.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: liquid-lp
+            expected-sender: SP1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KR9Y97S5
+            cost: 4500510
+            path: contracts/liquid-lp.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: liquid-exchange
+            expected-sender: SP1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KR9Y97S5
+            cost: 4507153
+            path: contracts/liquid-exchange.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "2.4"
