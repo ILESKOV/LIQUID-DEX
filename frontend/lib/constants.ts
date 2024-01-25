@@ -5,7 +5,7 @@ export const appDetails: AuthOptions['appDetails'] = {
   icon: 'http://www.chem4kids.com/files/art/matter-liquid-01.jpg',
 }
 
-export const contractOwnerAddress = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM'
+export const contractOwnerAddress = 'ST1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KSVC9T2H'
 
 export const exchangeContractName = 'liquid-exchange'
 

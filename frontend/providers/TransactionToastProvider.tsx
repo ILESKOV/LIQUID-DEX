@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react'
 import toast from 'react-hot-toast'
+import { useStacks } from './StacksProvider'
 
 interface TransactionsToastContextValue {
   addTransactionToast: (transactionId: string, pendingMessage: string) => void
@@ -19,7 +20,7 @@ const TransactionToastsContext = createContext<
 export default function TransactionToastProvider({
   children,
 }: PropsWithChildren<{}>) {
-  const network = new StacksMocknet()
+  const { network } = useStacks()
   const [transactionIds, setTransactionIds] = useState<Set<string>>(new Set())
 
   useEffect(() => {

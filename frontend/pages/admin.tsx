@@ -95,7 +95,7 @@ export default function AdminPage() {
               id="exchange-token"
               defaultValue={exchangeToken}
               onChange={(e) => setExchangeToken(e.target.value)}
-              className="block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="block w-full rounded-md border-gray-300 p-2 text-gray-800 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               placeholder="some-token"
             />
           </div>
@@ -114,7 +114,7 @@ export default function AdminPage() {
               id="lp-token"
               defaultValue={lpToken}
               onChange={(e) => setLpToken(e.target.value)}
-              className="block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="block w-full rounded-md border-gray-300 p-2 text-gray-800 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               placeholder="some-token-lp"
             />
           </div>

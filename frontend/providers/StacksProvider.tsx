@@ -1,5 +1,5 @@
 import { AppConfig, UserData, UserSession } from '@stacks/connect'
-import { StacksNetwork, StacksMocknet } from '@stacks/network'
+import { StacksNetwork, StacksTestnet } from '@stacks/network'
 import {
   createContext,
   PropsWithChildren,
@@ -19,7 +19,7 @@ const AuthContext = createContext<StacksContextValue | undefined>(undefined)
 export default function StacksProvider({ children }: PropsWithChildren<{}>) {
   const [userData, setUserData] = useState<UserData | undefined>(undefined)
 
-  const network = new StacksMocknet()
+  const network = new StacksTestnet()
   const appConfig = new AppConfig(['store_write'])
   const userSession = new UserSession({ appConfig })
   const address: string | undefined = userData?.profile?.stxAddress?.testnet
