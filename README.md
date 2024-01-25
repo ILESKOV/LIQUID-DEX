@@ -114,7 +114,7 @@ export const contractOwnerAddress = <Put your deployer wallet address here>
 
 ```
 
-Example
+Example:
 
 ```
 export const contractOwnerAddress = 'ST1DAGPRT8MG9VYNV3QQSVYQBRCRHV2Z1KSVC9T2H'
