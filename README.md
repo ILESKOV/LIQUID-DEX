@@ -10,13 +10,13 @@
 - [Setup](#setup)
 - [Contact](#contact)
 
-## General Information
+## 🚩 General Information
 
 - The 'LIQUID' is an exchange for trading STX/LIQ
 - Connect with your wallet, mint, provide liquidity and trade
 - User can provide liquidity, swap , earn revenue from trading and remove liquidity
 
-## Features
+## 🌟 Features
 
 List the ready features here:
 
@@ -28,11 +28,11 @@ List the ready features here:
 - User can remove liquidity
 - User can set slippage and swap STX/LIQ and LIQ/STX using AMM
 
-## Screenshots
+## 🎦 Screenshots
 
 ![Example screenshot](./helpers/Screenshot.png)
 
-## Setup
+## 👀 Setup
 
 ### 📦 Clone/Download the Repository
 
@@ -139,6 +139,6 @@ $ npm install
 $ npm run dev
 ```
 
-## Contact
+## 💬 Contact
 
 Created by [@LESKOV](https://www.linkedin.com/in/ivan-leskov-4b5664189/) - feel free to contact me!
