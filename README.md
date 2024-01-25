@@ -1,6 +1,7 @@
 # 'LIQUID' Decentralized Exchange
 
 > 'LIQUID' Exchange with 'LIQUID' 'LIQ' SIP010 standard token
+
 > [LIQUID-DEX](https://stacks-dex.vercel.app/) vercel app
 
 ## 📁 Table of Contents
