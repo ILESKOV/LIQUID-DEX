@@ -1,27 +1,9 @@
-
-;; title: liquid
-;; version:
-;; summary:
-;; description:
-
-;; traits
-;;
-
-;; token definitions
 (define-fungible-token liquid)
 
-;; constants
 (define-constant contract-owner tx-sender)
 (define-constant err-owner-only (err u100))
 (define-constant err-amount-zero (err u101))
 
-;; data vars
-;;
-
-;; data maps
-;;
-
-;; public functions
 (define-public (mint (amount uint) (who principal))
   (begin
     (asserts! (is-eq contract-owner tx-sender) err-owner-only)
@@ -42,11 +24,7 @@
     )
 )
 
-;; read only functions
 (define-read-only (get-balance (who principal))
   (ft-get-balance liquid who)
 )
-
-;; private functions
-;;
 
