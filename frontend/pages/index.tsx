@@ -1,10 +1,9 @@
-import PageHeading from '../components/PageHeading';
+import PageHeading from '../components/PageHeading'
 
 export default function Home() {
-
   return (
     <div className="flex flex-col items-center justify-center py-2">
-      <PageHeading>My Exchange</PageHeading>
+      <PageHeading>'LIQUID' Exchange</PageHeading>
     </div>
   )
 }
